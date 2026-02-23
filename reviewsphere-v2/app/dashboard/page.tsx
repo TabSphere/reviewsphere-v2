@@ -84,7 +84,7 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <GuidedTour steps={tourSteps} onComplete={() => console.log("Tour completed")} />
+      <GuidedTour steps={tourSteps} />
       <div className="space-y-6 animate-subtle">
         <section id="overview-panel">
           <OverviewPanel profile={profile ?? null} />
