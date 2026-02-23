@@ -5,9 +5,9 @@ import TestimonialSection from "@/components/layout/TestimonialSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: 'linear-gradient(135deg, #F8FFFE 0%, #F0F9F6 50%, #F3F4FF 100%)' }}>
+    <div className="min-h-screen flex flex-col bg-slate-50">
       {/* Header */}
-      <header className="border-b border-slate-200/30 backdrop-blur-sm sticky top-0 z-50" style={{ background: 'rgba(255, 255, 255, 0.7)' }}>
+      <header className="border-b border-slate-200/30 backdrop-blur-sm sticky top-0 z-50 bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between">
           <div className="text-xl md:text-2xl font-black text-slate-900">ReviewSphere</div>
           <div className="flex gap-2 md:gap-3">
@@ -40,8 +40,7 @@ export default function Home() {
                 Professional Google review replies,
                 <span 
                   className="block bg-clip-text text-transparent relative z-10" 
-                  style={{ background: 'linear-gradient(90deg, var(--primary, #141817) 0%, var(--primary2, #5C6AC4) 100%)' }}
-                >
+                                  >
                   in seconds
                 </span>
               </h1>
@@ -58,19 +57,19 @@ export default function Home() {
 
           {/* Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 my-12 md:my-16 pt-4 md:pt-8">
-            <div className="p-4 md:p-6 rounded-2xl flex flex-col items-start" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0, 191, 166, 0.1)', backdropFilter: 'blur(8px)' }}>
+            <div className="p-6 rounded-2xl flex flex-col items-start bg-white shadow-lg border border-slate-200">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               <h3 className="font-bold text-slate-900 mb-2 text-sm md:text-base">Instant Replies</h3>
               <p className="text-xs md:text-sm text-slate-600">Generate professional responses in seconds, not hours.</p>
             </div>
             
-            <div className="p-4 md:p-6 rounded-2xl flex flex-col items-start" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(92, 106, 196, 0.1)', backdropFilter: 'blur(8px)' }}>
+            <div className="p-6 rounded-2xl flex flex-col items-start bg-white shadow-lg border border-slate-200">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" /></svg>
               <h3 className="font-bold text-slate-900 mb-2 text-sm md:text-base">5 Tones</h3>
               <p className="text-xs md:text-sm text-slate-600">Professional, Friendly, Empathetic, Concise, or SEO-optimized.</p>
             </div>
             
-            <div className="p-4 md:p-6 rounded-2xl flex flex-col items-start" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0, 191, 166, 0.1)', backdropFilter: 'blur(8px)' }}>
+            <div className="p-6 rounded-2xl flex flex-col items-start bg-white shadow-lg border border-slate-200">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3v18h18" /></svg>
               <h3 className="font-bold text-slate-900 mb-2 text-sm md:text-base">Full History</h3>
               <p className="text-xs md:text-sm text-slate-600">Track all replies and manage multiple locations effortlessly.</p>
@@ -81,15 +80,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-4 md:pt-8">
             <Link 
               href="/signup" 
-              className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-white font-bold text-sm md:text-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
-              style={{ background: 'linear-gradient(90deg, var(--primary, #00BFA6) 0%, var(--primary2, #5C6AC4) 100%)' }}
+              className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-white font-bold text-sm md:text-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 bg-gradient-to-r from-primary to-primary2"
             >
               Start free trial
             </Link>
             <Link 
               href="/upgrade" 
-              className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-slate-900 font-bold text-sm md:text-lg hover:bg-slate-100 transition-colors"
-              style={{ background: 'rgba(255, 255, 255, 0.8)', border: '1px solid rgba(0, 0, 0, 0.1)' }}
+              className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-slate-900 font-bold text-sm md:text-lg hover:bg-slate-100 transition-colors bg-white border border-slate-200"
             >
               View pricing
             </Link>
