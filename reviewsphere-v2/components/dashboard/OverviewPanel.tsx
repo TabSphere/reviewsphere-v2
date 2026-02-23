@@ -33,37 +33,37 @@ export default function OverviewPanel({ profile }: { profile: any | null }) {
   }
 
   return (
-    <div className="rounded-2xl border border-slate-200/70 p-6 bg-white/70 backdrop-blur-md shadow-sm">
-      <div className="flex items-center justify-between gap-6">
-        <div className="flex items-center gap-4">
-          <div className="w-20 h-20 rounded-xl bg-white/80 flex items-center justify-center overflow-hidden border border-slate-200/60">
+    <div className="rounded-2xl border border-slate-200/70 p-4 md:p-6 bg-white/70 backdrop-blur-md shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-white/80 flex items-center justify-center overflow-hidden border border-slate-200/60 flex-shrink-0">
             {logoUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={logoUrl} alt="Business logo" className="object-cover w-full h-full" />
             ) : (
-              <div className="text-sm text-slate-500 font-medium">No logo</div>
+              <div className="text-xs md:text-sm text-slate-500 font-medium">No logo</div>
             )}
           </div>
 
-          <div>
-            <div className="text-lg font-black text-slate-900">{businessName || profile?.full_name || profile?.email || 'Your business'}</div>
-            <div className="text-sm text-slate-600 mt-1">{profile?.plan ?? 'Starter'} plan • {profile?.credits_balance ?? 0} credits</div>
+          <div className="min-w-0">
+            <div className="text-base md:text-lg font-black text-slate-900 truncate">{businessName || profile?.full_name || profile?.email || 'Your business'}</div>
+            <div className="text-xs md:text-sm text-slate-600 mt-1">{profile?.plan ?? 'Starter'} plan • {profile?.credits_balance ?? 0} credits</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <label className="inline-block">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3 w-full md:w-auto">
+          <label className="flex-1 sm:flex-none">
             <input type="file" accept="image/*" onChange={handleFile} className="hidden" />
-            <Button className="px-4 py-2">{uploading ? 'Uploading...' : 'Upload logo'}</Button>
+            <Button className="px-3 md:px-4 py-2 text-xs md:text-sm w-full sm:w-auto">{uploading ? 'Uploading...' : 'Upload logo'}</Button>
           </label>
-          <Button onClick={() => window.location.assign('/upgrade')} className="px-4 py-2">Upgrade plan</Button>
+          <Button onClick={() => window.location.assign('/upgrade')} className="px-3 md:px-4 py-2 text-xs md:text-sm flex-1 sm:flex-none">Upgrade plan</Button>
         </div>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="col-span-2">
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+        <div className="col-span-1 md:col-span-2">
           <label className="text-xs font-semibold text-slate-600">Business name</label>
-          <input value={businessName} onChange={(e) => setBusinessName(e.target.value)} className="w-full mt-2 px-3 py-2 rounded-lg border border-slate-200/60 bg-white/60" />
+          <input value={businessName} onChange={(e) => setBusinessName(e.target.value)} className="w-full mt-2 px-3 py-2 rounded-lg border border-slate-200/60 bg-white/60 text-sm" />
         </div>
         <div>
           <div className="text-xs font-semibold text-slate-600">Google Business</div>

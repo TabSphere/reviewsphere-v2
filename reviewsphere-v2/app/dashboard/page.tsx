@@ -1,8 +1,9 @@
 import { createSupabaseServer } from "@/lib/supabase/server";
-import StatCard from "@/components/dashboard/StatCard";
+import DashboardStats from "@/components/dashboard/DashboardStats";
 import GeneratePanel from "@/components/dashboard/GeneratePanel";
 import HistoryList from "@/components/dashboard/HistoryList";
 import OverviewPanel from "@/components/dashboard/OverviewPanel";
+import GuidedTour from "@/components/layout/GuidedTour";
 
 type GenerationItem = {
   id: string;
@@ -45,26 +46,67 @@ export default async function DashboardPage() {
     generated_reply: h.generated_reply,
   }));
 
+  // Define tour steps
+  const tourSteps = [
+    {
+      id: "overview",
+      target: "#overview-panel",
+      title: "Welcome to ReviewSphere! 👋",
+      description:
+        "Upload your logo and link your Google Business account to get started. This is your business profile.",
+      position: "bottom" as const,
+    },
+    {
+      id: "stats",
+      target: "#overview",
+      title: "Track Your Progress",
+      description:
+        "See your current plan, how many replies you've used, and how many remain this month.",
+      position: "bottom" as const,
+    },
+    {
+      id: "generate",
+      target: "#generate",
+      title: "Generate Review Replies",
+      description:
+        "Select a review tone and let AI generate a professional response. Copy or use it directly!",
+      position: "top" as const,
+    },
+    {
+      id: "history",
+      target: "#history",
+      title: "View Your History",
+      description:
+        "All your generated replies are saved here. Track what you've created and refine your tone preferences.",
+      position: "top" as const,
+    },
+  ];
+
   return (
-    <div className="space-y-6 animate-subtle">
-      <section id="overview-panel">
-        <OverviewPanel profile={profile ?? null} />
-      </section>
-      <section id="overview">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <StatCard title="Plan" value={profile?.plan ?? "starter"} />
-          <StatCard title="Used" value={used} />
-          <StatCard title="Remaining" value={Math.max(limit - used, 0)} />
-        </div>
-      </section>
+    <div>
+      <GuidedTour steps={tourSteps} onComplete={() => console.log("Tour completed")} />
+      <div className="space-y-6 animate-subtle">
+        <section id="overview-panel">
+          <OverviewPanel profile={profile ?? null} />
+        </section>
+        <section id="overview">
+          <DashboardStats
+            stats={[
+              { title: "Plan", value: profile?.plan ?? "Starter", color: "teal" },
+              { title: "Used", value: used, color: "indigo", trend: 12 },
+              { title: "Remaining", value: Math.max(limit - used, 0), color: "purple" },
+            ]}
+          />
+        </section>
 
-      <section id="generate">
-        <GeneratePanel initialUsed={used} limit={limit} initialHistory={historyItems} />
-      </section>
+        <section id="generate">
+          <GeneratePanel initialUsed={used} limit={limit} initialHistory={historyItems} />
+        </section>
 
-      <section id="history">
-        <HistoryList items={historyItems} />
-      </section>
+        <section id="history">
+          <HistoryList items={historyItems} />
+        </section>
+      </div>
     </div>
   );
 }
