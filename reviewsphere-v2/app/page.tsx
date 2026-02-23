@@ -16,8 +16,7 @@ export default function Home() {
             </Link>
             <Link 
               href="/signup" 
-              className="px-3 md:px-6 py-2 md:py-2.5 rounded-lg text-white text-xs md:text-sm font-bold hover:shadow-lg transition-all duration-200" 
-              style={{ background: 'linear-gradient(90deg, var(--primary, #00BFA6) 0%, var(--primary2, #5C6AC4) 100%)' }}
+              className="px-3 md:px-6 py-2 md:py-2.5 rounded-lg text-white text-xs md:text-sm font-bold hover:shadow-lg transition-all duration-200 bg-gradient-to-r from-primary to-primary2"
             >
               Get started
             </Link>
@@ -41,7 +40,7 @@ export default function Home() {
                 Professional Google review replies,
                 <span 
                   className="block bg-clip-text text-transparent relative z-10" 
-                  style={{ background: 'linear-gradient(90deg, var(--primary, #00BFA6) 0%, var(--primary2, #5C6AC4) 100%)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--primary, #141817) 0%, var(--primary2, #5C6AC4) 100%)' }}
                 >
                   in seconds
                 </span>
@@ -54,10 +53,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right screenshot placeholder */}
-          <div className="w-full max-w-md h-80 bg-white/30 backdrop-blur-sm rounded-xl border border-slate-200/60 flex items-center justify-center">
-            <span className="text-slate-400">App preview</span>
-          </div>
+
         </div>
 
           {/* Features Grid */}
