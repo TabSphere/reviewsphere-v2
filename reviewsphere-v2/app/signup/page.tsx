@@ -15,9 +15,32 @@ export default function SignupPage() {
 
   async function handleSignup() {
     setErr(""); setLoading(true);
-    const { error } = await supabaseBrowser.auth.signUp({ email, password });
-    if (error) { setErr(error.message); setLoading(false); return; }
-    setDone(true); setLoading(false);
+    try {
+      const { data, error } = await supabaseBrowser.auth.signUp({ email, password });
+      if (error) {
+        setErr(error.message);
+        setLoading(false);
+        return;
+      }
+
+      // If Supabase returned the user immediately (no email confirmation flow),
+      // create a profiles row so the dashboard shows account data.
+      const user = (data as any)?.user;
+      if (user?.id) {
+        try {
+          await supabaseBrowser.from('profiles').insert({ id: user.id, email }).throwOnError();
+        } catch (e) {
+          // Non-fatal: profile can be created later on first sign-in.
+          console.warn('Failed to create profile automatically', e);
+        }
+      }
+
+      setDone(true);
+    } catch (e: any) {
+      setErr(e?.message ?? 'Signup failed');
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (done) return (

@@ -2,6 +2,7 @@ import { createSupabaseServer } from "@/lib/supabase/server";
 import StatCard from "@/components/dashboard/StatCard";
 import GeneratePanel from "@/components/dashboard/GeneratePanel";
 import HistoryList from "@/components/dashboard/HistoryList";
+import OverviewPanel from "@/components/dashboard/OverviewPanel";
 
 type GenerationItem = {
   id: string;
@@ -46,6 +47,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6 animate-subtle">
+      <section id="overview-panel">
+        <OverviewPanel profile={profile ?? null} />
+      </section>
       <section id="overview">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <StatCard title="Plan" value={profile?.plan ?? "starter"} />

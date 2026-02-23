@@ -18,10 +18,14 @@ export async function POST(req: Request) {
     const { plan } = (await req.json()) as CheckoutRequest;
 
     const config = PLAN_CONFIG[plan];
-    if (!config?.priceId) {
+    if (!config) {
+      return NextResponse.json({ error: `Unknown plan: ${plan}` }, { status: 400 });
+    }
+
+    if (!config.priceId) {
       return NextResponse.json(
-        { error: `Unknown plan: ${plan}` },
-        { status: 400 }
+        { error: `Stripe price ID for plan '${plan}' is not configured. Please set the appropriate STRIPE_PRICE_* environment variable.` },
+        { status: 503 }
       );
     }
 
@@ -50,7 +54,7 @@ export async function POST(req: Request) {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001";
 
     const sessionParams: any = {
-      customer_id:           customerId,
+      customer:              customerId,
       line_items:            [{ price: config.priceId, quantity: 1 }],
       success_url:           `${baseUrl}/dashboard?upgraded=1`,
       cancel_url:            `${baseUrl}/upgrade?cancelled=1`,
@@ -88,6 +92,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Unauthorised" }, { status: 401 });
     }
     console.error("[checkout]", e);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    const message = e instanceof Error ? e.message : String(e);
+    const body: any = { error: "Server error" };
+    if (process.env.NODE_ENV !== "production") body.details = message;
+    return NextResponse.json(body, { status: 500 });
   }
 }

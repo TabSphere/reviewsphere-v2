@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { supabaseBrowser } from "@/lib/supabase/client";
 
@@ -89,26 +89,7 @@ const PLANS = [
     ],
     popular: true,
   },
-  {
-    key:         "agency",
-    name:        "Agency",
-    price:       129,
-    credits:     2000,
-    description: "For agencies managing reviews across multiple client accounts.",
-    icon:        <Icon.Building />,
-    accent:      "#EC4899",
-    light:       "rgba(236,72,153,0.08)",
-    features: [
-      "2,000 reply generations / month",
-      "Up to 25 business locations",
-      "All 5 reply tones",
-      "Full reply history",
-      "Brand voice per location",
-      "White-label ready",
-      "Dedicated support",
-    ],
-    popular: false,
-  },
+  // Agency plan removed — only Starter and Pro are offered now
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -116,6 +97,7 @@ export default function UpgradePage() {
   const router  = useRouter();
   const [loading, setLoading] = useState<string>("");  // key of plan being loaded
   const [err, setErr]         = useState("");
+  const [planConfig, setPlanConfig] = useState<Record<string, boolean> | null>(null);
 
   async function handleUpgrade(planKey: string) {
     setErr("");
@@ -173,19 +155,33 @@ export default function UpgradePage() {
     }
   }
 
+  // Fetch which plans are actually configured (have Stripe price IDs)
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch('/api/stripe/config');
+        if (!res.ok) return setPlanConfig({});
+        const json = await res.json();
+        setPlanConfig(json);
+      } catch (e) {
+        setPlanConfig({});
+      }
+    })();
+  }, []);
+
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
         :root {
-          --bg0: #F6F8FF;
-          --bg1: #F8FAFC;
-          --stroke: rgba(226,232,240,0.70);
-          --text: #0F172A;
-          --muted: #64748B;
-          --primary: #5B6CFF;
-          --primary2: #8B5CF6;
+          --bg0: #F6FFFB;
+          --bg1: #F0FFF9;
+          --stroke: rgba(220,237,230,0.70);
+          --text: #042027;
+          --muted: #35615A;
+          --primary: #00BFA6; /* teal */
+          --primary2: #5C6AC4; /* indigo */
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -193,9 +189,9 @@ export default function UpgradePage() {
         body {
           font-family: 'Plus Jakarta Sans', sans-serif;
           background:
-            radial-gradient(1200px 700px at 25% 0%, rgba(91,108,255,0.18), transparent 55%),
-            radial-gradient(1200px 700px at 85% 10%, rgba(139,92,246,0.16), transparent 50%),
-            linear-gradient(135deg, var(--bg0) 0%, var(--bg1) 60%, #FEF7FF 100%);
+            radial-gradient(1200px 700px at 25% 0%, rgba(0,191,166,0.12), transparent 55%),
+            radial-gradient(1200px 700px at 85% 10%, rgba(92,106,196,0.10), transparent 50%),
+            linear-gradient(135deg, var(--bg0) 0%, var(--bg1) 60%, #FCFFFE 100%);
           color: var(--text);
           min-height: 100vh;
         }
@@ -204,7 +200,7 @@ export default function UpgradePage() {
         @keyframes spin    { to { transform:rotate(360deg); } }
         @keyframes pulse   { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
 
-        .up-page  { max-width:1100px; margin:0 auto; padding:60px 28px 100px; }
+        .up-page  { max-width:1100px; margin:0 auto; padding:60px 28px 100px; display:flex; flex-direction:column; align-items:center; width:100%; }
 
         /* Back */
         .up-back {
@@ -213,6 +209,7 @@ export default function UpgradePage() {
           background:none; border:none; cursor:pointer;
           padding:0; margin-bottom:48px;
           transition:color 0.13s;
+          align-self:flex-start;
         }
         .up-back:hover { color:var(--text); }
 
@@ -245,7 +242,7 @@ export default function UpgradePage() {
         .up-trust-item svg { color:var(--primary); }
 
         /* Grid */
-        .up-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; animation:fadeUp 0.45s 0.1s ease both; }
+        .up-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; animation:fadeUp 0.45s 0.1s ease both; max-width:900px; margin:0 auto; width:100%; }
 
         .up-card {
           background:rgba(255,255,255,0.72);
@@ -346,7 +343,7 @@ export default function UpgradePage() {
         .up-manage-btn:hover { opacity:0.7; }
 
         @media (max-width:900px) {
-          .up-grid { grid-template-columns:1fr; max-width:480px; margin:0 auto; }
+          .up-grid { grid-template-columns:1fr; max-width:480px; margin:0 auto; width:100%; }
           .up-hero-title { font-size:34px; }
         }
       `}</style>
@@ -415,11 +412,12 @@ export default function UpgradePage() {
               <button
                 className={`up-btn${plan.popular ? " primary" : " secondary"}`}
                 onClick={() => handleUpgrade(plan.key)}
-                disabled={loading === plan.key}
+                disabled={loading === plan.key || !!(planConfig && !planConfig[plan.key])}
+                title={!!(planConfig && !planConfig[plan.key]) ? 'Pricing not configured' : undefined}
               >
                 {loading === plan.key
                   ? <><span className={`up-spin${plan.popular ? "" : " dark"}`} /> Processing…</>
-                  : `Get ${plan.name} — £${plan.price}/mo`
+                  : (!!(planConfig && !planConfig[plan.key]) ? 'Unavailable' : `Get ${plan.name} — £${plan.price}/mo`)
                 }
               </button>
             </div>
