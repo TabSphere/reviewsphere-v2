@@ -5,11 +5,24 @@ import TestimonialSection from "@/components/layout/TestimonialSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
+    <div className="relative min-h-screen flex flex-col bg-slate-50">
+          {/* Background video – place your MP4/webm in public/hero.mp4 and update src below */}
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-20"
+            autoPlay
+            loop
+            muted
+            playsInline
+            src="/hero.mp4"
+          />
       {/* Header */}
       <header className="border-b border-slate-200/30 backdrop-blur-sm sticky top-0 z-50 bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between">
-          <div className="text-xl md:text-2xl font-black text-slate-900">ReviewSphere</div>
+          {/* logo placeholder */}
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold text-slate-600">Logo</div>
+            <div className="text-xl md:text-2xl font-black text-slate-900">ReviewSphere</div>
+          </div>
           <div className="flex gap-2 md:gap-3">
             <Link href="/login" className="px-3 md:px-6 py-2 md:py-2.5 text-xs md:text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors">
               Sign in
