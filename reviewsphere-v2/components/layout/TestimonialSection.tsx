@@ -8,7 +8,6 @@ export default function TestimonialSection() {
       company: "Sofia's Italian Kitchen",
       content:
         "ReviewSphere saved us hours every week. We went from 2-3 hours responding to reviews to just 5 minutes. Our response rate went from 30% to 98%.",
-      avatar: "👩‍💼",
       rating: 5,
     },
     {
@@ -17,7 +16,6 @@ export default function TestimonialSection() {
       company: "Riverside Boutique Hotel",
       content:
         "The AI understands our brand voice perfectly. Guests have commented that our responses feel more personal and engaging than ever before.",
-      avatar: "👨‍💼",
       rating: 5,
     },
     {
@@ -26,7 +24,6 @@ export default function TestimonialSection() {
       company: "Bloom Aesthetics",
       content:
         "Professional, personalized replies every single time. ReviewSphere handles negative reviews with such grace and professionalism. Highly impressed!",
-      avatar: "👩‍🦱",
       rating: 5,
     },
   ];
@@ -46,52 +43,59 @@ export default function TestimonialSection() {
 
         {/* Testimonials Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, idx) => (
-            <div
-              key={idx}
-              className="rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.5) 100%)",
-                border: "1px solid rgba(0, 191, 166, 0.1)",
-                backdropFilter: "blur(8px)",
-              }}
-            >
-              {/* Rating Stars */}
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <span key={i} className="text-lg">
-                    ⭐
-                  </span>
-                ))}
-              </div>
-
-              {/* Quote */}
-              <p className="text-slate-700 font-medium leading-relaxed mb-6">
-                "{testimonial.content}"
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center gap-4">
-                <div className="text-4xl">{testimonial.avatar}</div>
-                <div>
-                  <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
-                  <p className="text-sm text-slate-600">
-                    {testimonial.role} at {testimonial.company}
-                  </p>
-                </div>
-              </div>
-
-              {/* Hover accent bar */}
+          {testimonials.map((testimonial, idx) => {
+            const initials = testimonial.name
+              .split(" ")
+              .map((n) => n[0])
+              .join("")
+              .toUpperCase();
+            return (
               <div
-                className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl transition-all duration-300 origin-left scale-x-0 group-hover:scale-x-100"
+                key={idx}
+                className="rounded-2xl p-8 border transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group relative"
                 style={{
                   background:
-                    "linear-gradient(90deg, #00BFA6 0%, #5C6AC4 100%)",
+                    "linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.5) 100%)",
+                  border: "1px solid rgba(0, 191, 166, 0.1)",
+                  backdropFilter: "blur(8px)",
                 }}
-              />
-            </div>
-          ))}
+              >
+                {/* Rating Stars */}
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: testimonial.rating }).map((_, i) => (
+                    <span key={i} className="text-lg text-yellow-500">★</span>
+                  ))}
+                </div>
+
+                {/* Quote */}
+                <p className="text-slate-700 font-medium leading-relaxed mb-6">
+                  "{testimonial.content}"
+                </p>
+
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">
+                    {initials}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
+                    <p className="text-sm text-slate-600">
+                      {testimonial.role} at {testimonial.company}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Hover accent bar */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-1 rounded-b-2xl transition-all duration-300 origin-left scale-x-0 group-hover:scale-x-100"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #00BFA6 0%, #5C6AC4 100%)",
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
 
         {/* Social Proof */}
@@ -118,3 +122,4 @@ export default function TestimonialSection() {
     </section>
   );
 }
+
