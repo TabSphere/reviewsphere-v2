@@ -26,47 +26,56 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 md:px-6 py-12 md:py-20 text-center">
-        <div className="max-w-4xl mx-auto space-y-8 md:space-y-10">
-          {/* Badge */}
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full" style={{ background: 'rgba(0, 191, 166, 0.08)', border: '1px solid rgba(0, 191, 166, 0.2)' }}>
-              <span className="text-xs font-bold" style={{ color: 'var(--primary, #00BFA6)' }}>✨ AI-POWERED</span>
+      <main className="flex-1 flex flex-col items-center justify-center px-4 md:px-6 py-12 md:py-20">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-6xl w-full mx-auto">
+          {/* Left text column */}
+          <div className="space-y-8 md:space-y-10 max-w-xl text-center lg:text-left">
+            {/* Badge */}
+            <div>
+              <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full" style={{ background: 'rgba(0, 191, 166, 0.08)', border: '1px solid rgba(0, 191, 166, 0.2)' }}>
+                <span className="text-xs font-bold" style={{ color: 'var(--primary, #00BFA6)' }}>AI-POWERED</span>
+              </div>
+              
+              {/* Main Heading */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-tight my-6 md:my-8">
+                Professional Google review replies,
+                <span 
+                  className="block bg-clip-text text-transparent relative z-10" 
+                  style={{ background: 'linear-gradient(90deg, var(--primary, #00BFA6) 0%, var(--primary2, #5C6AC4) 100%)' }}
+                >
+                  in seconds
+                </span>
+              </h1>
+              
+              {/* Subtitle */}
+              <p className="text-base md:text-xl text-slate-600 font-medium max-w-2xl leading-relaxed">
+                Stop spending hours drafting responses. ReviewSphere generates personalized, professional replies powered by AI. Boost your reputation instantly.
+              </p>
             </div>
-            
-            {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-tight my-6 md:my-8">
-              Professional Google review replies,
-              <span 
-                className="block bg-clip-text text-transparent" 
-                style={{ background: 'linear-gradient(90deg, var(--primary, #00BFA6) 0%, var(--primary2, #5C6AC4) 100%)' }}
-              >
-                in seconds
-              </span>
-            </h1>
-            
-            {/* Subtitle */}
-            <p className="text-base md:text-xl text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed">
-              Stop spending hours drafting responses. ReviewSphere generates personalized, professional replies powered by AI. Boost your reputation instantly.
-            </p>
           </div>
+
+          {/* Right screenshot placeholder */}
+          <div className="w-full max-w-md h-80 bg-white/30 backdrop-blur-sm rounded-xl border border-slate-200/60 flex items-center justify-center">
+            <span className="text-slate-400">App preview</span>
+          </div>
+        </div>
 
           {/* Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 my-12 md:my-16 pt-4 md:pt-8">
-            <div className="p-4 md:p-6 rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0, 191, 166, 0.1)', backdropFilter: 'blur(8px)' }}>
-              <div className="text-3xl md:text-4xl mb-2 md:mb-3">⚡</div>
+            <div className="p-4 md:p-6 rounded-2xl flex flex-col items-start" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0, 191, 166, 0.1)', backdropFilter: 'blur(8px)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               <h3 className="font-bold text-slate-900 mb-2 text-sm md:text-base">Instant Replies</h3>
               <p className="text-xs md:text-sm text-slate-600">Generate professional responses in seconds, not hours.</p>
             </div>
             
-            <div className="p-4 md:p-6 rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(92, 106, 196, 0.1)', backdropFilter: 'blur(8px)' }}>
-              <div className="text-3xl md:text-4xl mb-2 md:mb-3">🎯</div>
+            <div className="p-4 md:p-6 rounded-2xl flex flex-col items-start" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(92, 106, 196, 0.1)', backdropFilter: 'blur(8px)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" /></svg>
               <h3 className="font-bold text-slate-900 mb-2 text-sm md:text-base">5 Tones</h3>
               <p className="text-xs md:text-sm text-slate-600">Professional, Friendly, Empathetic, Concise, or SEO-optimized.</p>
             </div>
             
-            <div className="p-4 md:p-6 rounded-2xl" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0, 191, 166, 0.1)', backdropFilter: 'blur(8px)' }}>
-              <div className="text-3xl md:text-4xl mb-2 md:mb-3">📊</div>
+            <div className="p-4 md:p-6 rounded-2xl flex flex-col items-start" style={{ background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0, 191, 166, 0.1)', backdropFilter: 'blur(8px)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3v18h18" /></svg>
               <h3 className="font-bold text-slate-900 mb-2 text-sm md:text-base">Full History</h3>
               <p className="text-xs md:text-sm text-slate-600">Track all replies and manage multiple locations effortlessly.</p>
             </div>
@@ -90,8 +99,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <p className="text-xs md:text-sm text-slate-500 pt-4 md:pt-6">No credit card required • Built for businesses like yours • Cancel anytime</p>
-        </div>
+          <p className="text-xs md:text-sm text-slate-500 pt-4 md:pt-6">No credit card required - Built for businesses like yours - Cancel anytime</p>
       </main>
 
       {/* Testimonials Section */}
