@@ -29,7 +29,7 @@ export default function Home() {
       <main className="flex-1 flex flex-col items-center justify-center px-4 md:px-6 py-12 md:py-20">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-6xl w-full mx-auto">
           {/* Left text column */}
-          <div className="space-y-8 md:space-y-10 max-w-xl text-center lg:text-left">
+          <div className="space-y-8 md:space-y-10 max-w-xl text-center lg:text-left relative z-20">
             {/* Badge */}
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full" style={{ background: 'rgba(0, 191, 166, 0.08)', border: '1px solid rgba(0, 191, 166, 0.2)' }}>
