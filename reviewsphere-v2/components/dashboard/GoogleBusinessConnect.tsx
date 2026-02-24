@@ -17,10 +17,10 @@ export default function GoogleBusinessConnect({ isLinked, businessName }: { isLi
       if (data.url) {
         window.location.href = data.url;
       } else {
-        setError("Google OAuth is not configured. Please contact support.");
+        setError("Google OAuth credentials not configured. Check GOOGLE_SETUP_GUIDE.md in your project root for setup instructions.");
       }
     } catch (e) {
-      setError("Failed to connect. Please try again.");
+      setError("Failed to connect. Make sure GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET are set in your .env.local file. See GOOGLE_SETUP_GUIDE.md for help.");
     } finally {
       setLoading(false);
     }
@@ -66,8 +66,19 @@ export default function GoogleBusinessConnect({ isLinked, businessName }: { isLi
             Link your Google Business account to automatically pull reviews and generate AI-powered replies.
           </p>
           {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm font-semibold text-red-600">
-              {error}
+            <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="text-sm font-semibold text-red-600 mb-2">{error}</div>
+              <div className="text-xs text-red-500 space-y-1">
+                <p>📋 <strong>Quick Setup:</strong></p>
+                <ol className="list-decimal ml-5 space-y-1">
+                  <li>Go to <a href="https://console.cloud.google.com/" target="_blank" rel="noopener" className="underline">Google Cloud Console</a></li>
+                  <li>Create a project and enable "Google Business Profile API"</li>
+                  <li>Create OAuth 2.0 credentials (Web application)</li>
+                  <li>Add credentials to <code className="bg-red-100 px-1 rounded">.env.local</code> file</li>
+                  <li>Restart your dev server</li>
+                </ol>
+                <p className="mt-2">📖 See <strong>GOOGLE_SETUP_GUIDE.md</strong> for detailed instructions</p>
+              </div>
             </div>
           )}
           <button
