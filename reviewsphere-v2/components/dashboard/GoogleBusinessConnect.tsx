@@ -11,16 +11,36 @@ export default function GoogleBusinessConnect({ isLinked, businessName }: { isLi
     setError("");
 
     try {
+      console.log("📡 Fetching Google auth link...");
       const res = await fetch("/api/google/link");
+      console.log("Response Status:", res.status);
+      console.log("Content-Type:", res.headers.get("content-type"));
+      
+      const contentType = res.headers.get("content-type");
+      if (!contentType?.includes("application/json")) {
+        throw new Error(`Expected JSON response, got ${contentType}`);
+      }
+
       const data = await res.json();
+      console.log("Response Data:", { hasUrl: !!data.url, hasError: !!data.error, error: data.error });
+
+      if (!res.ok) {
+        setError(`Failed to get Google auth URL: ${data.error || "Server error"}`);
+        console.error("API Error:", data);
+        return;
+      }
 
       if (data.url) {
+        console.log("✅ Redirecting to Google OAuth...");
         window.location.href = data.url;
       } else {
-        setError("Google OAuth credentials not configured. Check GOOGLE_SETUP_GUIDE.md in your project root for setup instructions.");
+        setError(`Google OAuth credentials not configured. Missing: ${!data.hasClientId ? "GOOGLE_CLIENT_ID " : ""}${!data.hasClientSecret ? "GOOGLE_CLIENT_SECRET" : ""}`);
+        console.error("No URL in response:", data);
       }
     } catch (e) {
-      setError("Failed to connect. Make sure GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET are set in your .env.local file. See GOOGLE_SETUP_GUIDE.md for help.");
+      const message = e instanceof Error ? e.message : String(e);
+      setError(`Failed to connect: ${message}`);
+      console.error("Error fetching Google link:", e);
     } finally {
       setLoading(false);
     }

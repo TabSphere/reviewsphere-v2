@@ -2,6 +2,8 @@ import { createSupabaseServer } from "@/lib/supabase/server";
 import DashboardStats from "@/components/dashboard/DashboardStats";
 import OverviewPanel from "@/components/dashboard/OverviewPanel";
 import GoogleBusinessConnect from "@/components/dashboard/GoogleBusinessConnect";
+import GoogleManualConnect from "@/components/dashboard/GoogleManualConnect";
+import GoogleDemoConnect from "@/components/dashboard/GoogleDemoConnect";
 import ReviewManagement from "@/components/dashboard/ReviewManagement";
 import ImageCarousel from "@/components/layout/ImageCarousel";
 
@@ -66,10 +68,20 @@ export default async function DashboardPage() {
           <h2 className="text-xl font-black text-slate-900 mb-4 flex items-center gap-2">
             <span>🔗</span> Google Business Profile
           </h2>
-          <GoogleBusinessConnect
-            isLinked={!!googleBusiness}
-            businessName={googleBusiness?.location_name}
-          />
+          {!googleBusiness ? (
+            <div className="space-y-4">
+              <GoogleDemoConnect />
+              <div className="text-xs text-slate-500 text-center py-2">
+                — or use manual token below —
+              </div>
+              <GoogleManualConnect />
+            </div>
+          ) : (
+            <GoogleBusinessConnect
+              isLinked={!!googleBusiness}
+              businessName={googleBusiness?.location_name}
+            />
+          )}
         </section>
 
         {/* Review Management */}
