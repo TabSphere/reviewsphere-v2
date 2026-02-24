@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
+import { createSupabaseServer } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 
@@ -26,6 +27,13 @@ export async function GET(req: Request) {
   }
 
   try {
+    const supabase = await createSupabaseServer();
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      return NextResponse.redirect(new URL("/login?google_error=1", req.url));
+    }
+
     const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -45,12 +53,20 @@ export async function GET(req: Request) {
       return NextResponse.redirect(new URL("/dashboard?google_error=1", req.url));
     }
 
-    // Store tokens in a simple table `oauth_tokens` associated by subject 'google'
-    // Note: in a real app you must associate with the logged-in user and protect access properly.
+    // Store Google Business account linked to user
     try {
-      await supabaseAdmin.from("oauth_tokens").insert({ provider: "google", tokens: tokenJson });
+      await supabaseAdmin.from("google_business_accounts").upsert({
+        user_id: user.id,
+        account_name: "Google Business Account",
+        location_id: "demo_location",
+        location_name: "Demo Business",
+        access_token: tokenJson.access_token,
+        refresh_token: tokenJson.refresh_token,
+        token_expires_at: new Date(Date.now() + (tokenJson.expires_in * 1000)).toISOString(),
+        is_active: true,
+      });
     } catch (e) {
-      console.warn("Failed to persist oauth tokens", e);
+      console.warn("Failed to persist Google Business account", e);
     }
 
     return NextResponse.redirect(new URL("/dashboard?google_linked=1", req.url));
