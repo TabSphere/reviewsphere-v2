@@ -8,13 +8,15 @@ export default function Home() {
     <div className="relative min-h-screen flex flex-col bg-slate-50">
           {/* Background video – place your MP4/webm in public/hero.mp4 and update src below */}
           <video
-            className="absolute inset-0 w-full h-full object-cover opacity-20"
+            className="absolute inset-0 w-full h-full object-cover opacity-20 animate-fade-in"
             autoPlay
             loop
             muted
             playsInline
             src="/hero.mp4"
           />
+          {/* subtle dark overlay for contrast */}
+          <div className="absolute inset-0 bg-black/30 pointer-events-none animate-fade-in" />
       {/* Header */}
       <header className="border-b border-slate-200/30 backdrop-blur-sm sticky top-0 z-50 bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between">
@@ -41,7 +43,7 @@ export default function Home() {
       <main className="flex-1 flex flex-col items-center justify-center px-4 md:px-6 py-12 md:py-20">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 max-w-6xl w-full mx-auto">
           {/* Left text column */}
-          <div className="space-y-8 md:space-y-10 max-w-xl text-center lg:text-left relative z-20">
+          <div className="space-y-8 md:space-y-10 max-w-xl text-center lg:text-left relative z-20 animate-subtle">
             {/* Badge */}
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full" style={{ background: 'rgba(0, 191, 166, 0.08)', border: '1px solid rgba(0, 191, 166, 0.2)' }}>
@@ -49,7 +51,7 @@ export default function Home() {
               </div>
               
               {/* Main Heading */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-tight my-6 md:my-8">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 leading-tight my-6 md:my-8 opacity-0 animate-subtle delay-150">
                 Professional Google review replies,
                 <span 
                   className="block bg-clip-text text-transparent relative z-10" 
@@ -59,7 +61,7 @@ export default function Home() {
               </h1>
               
               {/* Subtitle */}
-              <p className="text-base md:text-xl text-slate-600 font-medium max-w-2xl leading-relaxed">
+              <p className="text-base md:text-xl text-slate-600 font-medium max-w-2xl leading-relaxed opacity-0 animate-subtle delay-300">
                 Stop spending hours drafting responses. ReviewSphere generates personalized, professional replies powered by AI. Boost your reputation instantly.
               </p>
             </div>
