@@ -3,8 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary: #00BFA6;
-  --primary2: #5C6AC4;
+  --primary: #14b8a6;
+  --primary2: #4f46e5;
 }
 
 @media (prefers-color-scheme: dark) {

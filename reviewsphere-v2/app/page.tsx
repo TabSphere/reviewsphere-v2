@@ -17,18 +17,20 @@ export default function Home() {
         {/* Header */}
         <header className="border-b border-slate-200/30 backdrop-blur-md sticky top-0 z-50 bg-white/80 shadow-sm">
           <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-5 flex items-center justify-between">
-            {/* logo placeholder */}
+            {/* logo */}
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-slate-200 rounded-full flex items-center justify-center text-xs font-bold text-slate-600">Logo</div>
+              <div className="w-8 h-8 bg-gradient-to-br from-teal-500 to-indigo-600 rounded-lg flex items-center justify-center shadow-md">
+                <span className="text-lg">⭐</span>
+              </div>
               <div className="text-xl md:text-2xl font-black text-slate-900">ReviewSphere</div>
             </div>
             <div className="flex gap-2 md:gap-3">
-              <Link href="/login" className="px-3 md:px-6 py-2 md:py-2.5 text-xs md:text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors">
+              <Link href="/login" className="px-3 md:px-6 py-2 md:py-2.5 text-xs md:text-sm font-bold text-slate-700 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100">
                 Sign in
               </Link>
               <Link 
                 href="/signup" 
-                className="px-3 md:px-6 py-2 md:py-2.5 rounded-lg text-white text-xs md:text-sm font-bold hover:shadow-lg transition-all duration-200 bg-gradient-to-r from-primary to-primary2"
+                className="px-3 md:px-6 py-2 md:py-2.5 rounded-lg text-white text-xs md:text-sm font-bold hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 bg-gradient-to-r from-teal-500 to-indigo-600"
               >
                 Get started
               </Link>
@@ -40,8 +42,8 @@ export default function Home() {
         <main className="flex-1 flex flex-col items-center justify-center px-4 md:px-6 py-12 md:py-20">
           <div className="flex flex-col items-center justify-center gap-8 max-w-3xl w-full mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full backdrop-blur-sm" style={{ background: 'rgba(0, 191, 166, 0.2)', border: '1px solid rgba(0, 191, 166, 0.4)' }}>
-              <span className="text-xs font-bold" style={{ color: 'var(--primary, #00BFA6)' }}>AI-POWERED</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full backdrop-blur-sm bg-teal-500/20 border border-teal-500/40">
+              <span className="text-xs font-bold text-teal-600">AI-POWERED</span>
             </div>
             
             {/* Main Heading */}
@@ -61,13 +63,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center pt-8 opacity-0 animate-subtle delay-500">
               <Link 
                 href="/signup" 
-                className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-white font-bold text-sm md:text-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 bg-gradient-to-r from-primary to-primary2"
+                className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-white font-bold text-sm md:text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 bg-gradient-to-r from-teal-500 to-indigo-600"
               >
                 Start free trial
               </Link>
               <Link 
                 href="/upgrade" 
-                className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-white font-bold text-sm md:text-lg hover:shadow-lg transition-colors bg-white/20 backdrop-blur-sm border border-white/40"
+                className="px-6 md:px-8 py-3 md:py-4 rounded-xl text-white font-bold text-sm md:text-lg shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 bg-white/20 backdrop-blur-sm border border-white/40"
               >
                 View pricing
               </Link>

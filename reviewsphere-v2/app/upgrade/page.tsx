@@ -180,8 +180,8 @@ export default function UpgradePage() {
           --stroke: rgba(220,237,230,0.70);
           --text: #042027;
           --muted: #35615A;
-          --primary: #00BFA6; /* teal */
-          --primary2: #5C6AC4; /* indigo */
+          --primary: #14b8a6; /* teal-500 */
+          --primary2: #4f46e5; /* indigo-600 */
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -218,8 +218,8 @@ export default function UpgradePage() {
         .up-hero-badge {
           display:inline-flex; align-items:center; gap:7px;
           padding:7px 16px; border-radius:999px;
-          background:rgba(91,108,255,0.10); border:1px solid rgba(91,108,255,0.22);
-          font-size:12px; font-weight:800; color:var(--primary);
+          background:rgba(20,184,166,0.10); border:1px solid rgba(20,184,166,0.22);
+          font-size:12px; font-weight:800; color:#0d9488;
           letter-spacing:0.05em; text-transform:uppercase; margin-bottom:20px;
         }
         .up-hero-title {
@@ -303,14 +303,14 @@ export default function UpgradePage() {
         .up-btn:disabled { opacity:0.55; cursor:not-allowed; transform:none; }
         .up-btn.primary {
           background:linear-gradient(135deg, var(--primary) 0%, var(--primary2) 100%);
-          color:#fff; box-shadow:0 12px 36px rgba(91,108,255,0.24);
+          color:#fff; box-shadow:0 12px 36px rgba(20,184,166,0.24);
         }
-        .up-btn.primary:hover:not(:disabled) { box-shadow:0 16px 48px rgba(91,108,255,0.32); }
+        .up-btn.primary:hover:not(:disabled) { box-shadow:0 16px 48px rgba(20,184,166,0.32); }
         .up-btn.secondary {
           background:rgba(255,255,255,0.65);
           color:var(--text); border:1.5px solid var(--stroke);
         }
-        .up-btn.secondary:hover:not(:disabled) { background:rgba(255,255,255,0.9); border-color:rgba(91,108,255,0.25); }
+        .up-btn.secondary:hover:not(:disabled) { background:rgba(255,255,255,0.9); border-color:rgba(20,184,166,0.25); }
 
         .up-spin {
           display:inline-block; width:15px; height:15px; border-radius:50%;
