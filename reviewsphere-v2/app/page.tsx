@@ -8,12 +8,12 @@ export default function Home() {
     <div className="relative min-h-screen flex flex-col bg-slate-50">
           {/* Background video – place your MP4/webm in public/hero.mp4 and update src below */}
           <video
-            className="absolute inset-0 w-full h-full object-cover opacity-20 animate-fade-in"
+            className="absolute inset-0 w-full h-full object-cover opacity-25 animate-fade-in"
             autoPlay
             loop
             muted
             playsInline
-            src="/hero.mp4"
+            src="/hero_1.mp4"
           />
           {/* subtle dark overlay for contrast */}
           <div className="absolute inset-0 bg-black/30 pointer-events-none animate-fade-in" />
